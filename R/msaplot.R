@@ -44,10 +44,13 @@ msaplot <- function(p, fasta, offset=0, width=1, color=NULL, window=NULL, bg_lin
     if (is.null(window)) {
         window <- c(1, ncol(x))
     }
+    if (window[1] == window[2]){
+    slice <- seq(window[1], window[2], by=0)
 
+    } else {
     slice <- seq(window[1], window[2], by=1)
     x <- x[, slice]
-
+    }
     seqs <- lapply(1:nrow(x), function(i) {
         seq <- as.vector(as.character(x[i,]))
         seq[seq == '?'] <- '-'
